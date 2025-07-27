@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPCarpool - Modern Design Preview</title>
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/16ae8e710d.js" crossorigin="anonymous"></script>
+  
+  <style>
+    /* Include our new modern CSS styles */
+    :root {
+      /* Primary Color Palette */
+      --primary-blue: #667eea;
+      --primary-blue-light: #a8b8ff;
+      --primary-blue-dark: #4c63d2;
+      
+      /* Secondary Colors */
+      --secondary-green: #43c59e;
+      --secondary-green-light: #6de4c1;
+      --secondary-green-dark: #2da884;
+      
+      /* Accent Colors */
+      --accent-purple: #9c88ff;
+      --accent-orange: #ff9a56;
+      --accent-pink: #ff7eb3;
+      
+      /* Neutral Colors */
+      --neutral-white: #ffffff;
+      --neutral-gray-50: #f8fafc;
+      --neutral-gray-100: #f1f5f9;
+      --neutral-gray-200: #e2e8f0;
+      --neutral-gray-300: #cbd5e1;
+      --neutral-gray-400: #94a3b8;
+      --neutral-gray-500: #64748b;
+      --neutral-gray-600: #475569;
+      --neutral-gray-700: #334155;
+      --neutral-gray-800: #1e293b;
+      --neutral-gray-900: #0f172a;
+      
+      /* Glassmorphism Colors */
+      --glass-white: rgba(255, 255, 255, 0.25);
+      --glass-white-strong: rgba(255, 255, 255, 0.35);
+      --glass-border: rgba(255, 255, 255, 0.18);
+      --glass-shadow: rgba(31, 38, 135, 0.37);
+      
+      /* Gradients */
+      --gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
+      --gradient-secondary: linear-gradient(135deg, var(--accent-purple) 0%, var(--primary-blue) 100%);
+      --gradient-accent: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-pink) 100%);
+      --gradient-glass: linear-gradient(135deg, var(--glass-white) 0%, var(--glass-white-strong) 100%);
+      
+      /* Spacing */
+      --spacing-xs: 0.25rem;
+      --spacing-sm: 0.5rem;
+      --spacing-md: 1rem;
+      --spacing-lg: 1.5rem;
+      --spacing-xl: 2rem;
+      --spacing-2xl: 3rem;
+      --spacing-3xl: 4rem;
+      
+      /* Border Radius */
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-2xl: 1.5rem;
+      --radius-full: 9999px;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --shadow-glass: 0 8px 32px 0 var(--glass-shadow);
+      
+      /* Typography */
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      
+      /* Transitions */
+      --transition-fast: 0.15s ease-out;
+      --transition-normal: 0.3s ease-out;
+      --transition-slow: 0.5s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--gradient-primary);
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      color: var(--neutral-gray-800);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .glassmorphism {
+      background: var(--gradient-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-glass);
+    }
+
+    .glassmorphism-strong {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-glass);
+    }
+
+    .navbar {
+      background: var(--glass-white);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: none;
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-md);
+      padding: var(--spacing-md) 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-brand img {
+      height: 40px;
+      margin-right: var(--spacing-sm);
+    }
+
+    .title {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      font-size: 1.75rem;
+      margin: 0;
+    }
+
+    .beta-badge {
+      background: var(--gradient-accent);
+      color: var(--neutral-white);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: var(--spacing-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-lg);
+    }
+
+    .co2-tracker {
+      background: var(--glassmorphism);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-md);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      border: 1px solid var(--glass-border);
+    }
+
+    .co2-icon {
+      width: 30px;
+      height: 30px;
+      background: var(--gradient-secondary);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neutral-white);
+      font-size: 0.875rem;
+    }
+
+    .co2-savings {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--neutral-gray-800);
+      margin: 0;
+    }
+
+    .co2-equivalents {
+      font-size: 0.75rem;
+      color: var(--neutral-gray-500);
+      margin: 0;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-sm) var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      font-weight: 500;
+      font-size: 0.875rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-normal);
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button-primary {
+      background: var(--gradient-primary);
+      color: var(--neutral-white);
+      box-shadow: var(--shadow-md);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .button-outline {
+      background: transparent;
+      color: var(--primary-blue);
+      border: 2px solid var(--primary-blue);
+    }
+
+    .button-outline:hover {
+      background: var(--primary-blue);
+      color: var(--neutral-white);
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-body {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      padding: var(--spacing-3xl) 0;
+    }
+
+    .card {
+      background: var(--glassmorphism);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-glass);
+      border: 1px solid var(--glass-border);
+      transition: all var(--transition-normal);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+      background: var(--glassmorphism-strong);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--neutral-gray-800);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+    }
+
+    .filter-container {
+      background: var(--glassmorphism);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .filter-select {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-sm) var(--spacing-md);
+      font-size: 0.875rem;
+    }
+
+    .tabs {
+      background: var(--glassmorphism);
+      border-top: 1px solid var(--glass-border);
+      padding: var(--spacing-lg) 0;
+    }
+
+    .tabs ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: var(--spacing-lg);
+    }
+
+    .tabs li a {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      text-decoration: none;
+      color: var(--neutral-gray-600);
+      transition: all var(--transition-normal);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .tabs li.is-active a {
+      background: var(--gradient-primary);
+      color: var(--neutral-white);
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .mr-2 { margin-right: var(--spacing-sm); }
+    .ml-2 { margin-left: var(--spacing-sm); }
+    .gap-4 { gap: var(--spacing-lg); }
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+  </style>
+</head>
+
+<body>
+  <div class="hero">
+    <!-- Modern Navbar -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik0xMiAxNkgyOFYyNEgxMlYxNloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xNiAxMkgyNFYyOEgxNlYxMloiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF9saW5lYXJfMV8xIiB4MT0iMCIgeTE9IjAiIHgyPSI0MCIgeTI9IjQwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdFRUEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNDNDNTlFIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K" alt="EPCarpool Logo">
+          <h1 class="title">EPCarpool</h1>
+          <span class="beta-badge">BETA</span>
+        </div>
+        
+        <div class="navbar-nav">
+          <div class="co2-tracker">
+            <div class="co2-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <div>
+              <div class="co2-savings">45.2 kg CO₂ saved</div>
+              <div class="co2-equivalents">≈ 112 miles driven</div>
+            </div>
+          </div>
+          
+          <a href="#" class="button button-outline">
+            <i class="fas fa-sign-out-alt mr-2"></i>
+            Log out
+          </a>
+          
+          <button class="button button-primary">
+            John Doe
+            <i class="fas fa-angle-down ml-2"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="hero-body">
+      <div class="container">
+        <div class="fade-in">
+          <!-- Filter Section -->
+          <div class="filter-container">
+            <label for="filter">Filter by:</label>
+            <select id="filter" class="filter-select">
+              <option value="all">All Events</option>
+              <option value="sports">Sports</option>
+              <option value="academic">Academic Teams</option>
+              <option value="socials">Socials</option>
+              <option value="other">Other</option>
+            </select>
+            
+            <button class="button button-primary">
+              <i class="fas fa-plus mr-2"></i>
+              Create Event
+            </button>
+          </div>
+
+          <!-- Events Grid -->
+          <div class="event-grid">
+            <div class="card">
+              <div class="card-title">
+                <i class="fas fa-basketball-ball mr-2" style="color: var(--accent-orange);"></i>
+                Basketball Tournament
+              </div>
+              <p style="color: var(--neutral-gray-600); margin-bottom: var(--spacing-md);">
+                Join us for the annual EPS basketball tournament at the community center.
+              </p>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+                <span style="font-size: 0.875rem; color: var(--neutral-gray-500);">
+                  <i class="fas fa-calendar mr-2"></i>
+                  March 15, 2025
+                </span>
+                <span style="font-size: 0.875rem; color: var(--neutral-gray-500);">
+                  <i class="fas fa-map-marker-alt mr-2"></i>
+                  Community Center
+                </span>
+              </div>
+              <div style="display: flex; gap: var(--spacing-sm);">
+                <button class="button button-primary" style="flex: 1;">
+                  <i class="fas fa-car mr-2"></i>
+                  Join Carpool
+                </button>
+                <button class="button button-outline">
+                  <i class="fas fa-info-circle"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">
+                <i class="fas fa-flask mr-2" style="color: var(--accent-purple);"></i>
+                Science Fair
+              </div>
+              <p style="color: var(--neutral-gray-600); margin-bottom: var(--spacing-md);">
+                Showcase your scientific innovations at the annual science fair.
+              </p>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+                <span style="font-size: 0.875rem; color: var(--neutral-gray-500);">
+                  <i class="fas fa-calendar mr-2"></i>
+                  March 20, 2025
+                </span>
+                <span style="font-size: 0.875rem; color: var(--neutral-gray-500);">
+                  <i class="fas fa-map-marker-alt mr-2"></i>
+                  School Auditorium
+                </span>
+              </div>
+              <div style="display: flex; gap: var(--spacing-sm);">
+                <button class="button button-primary" style="flex: 1;">
+                  <i class="fas fa-car mr-2"></i>
+                  Join Carpool
+                </button>
+                <button class="button button-outline">
+                  <i class="fas fa-info-circle"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">
+                <i class="fas fa-music mr-2" style="color: var(--accent-pink);"></i>
+                Spring Concert
+              </div>
+              <p style="color: var(--neutral-gray-600); margin-bottom: var(--spacing-md);">
+                Experience beautiful music performed by our talented students.
+              </p>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+                <span style="font-size: 0.875rem; color: var(--neutral-gray-500);">
+                  <i class="fas fa-calendar mr-2"></i>
+                  March 25, 2025
+                </span>
+                <span style="font-size: 0.875rem; color: var(--neutral-gray-500);">
+                  <i class="fas fa-map-marker-alt mr-2"></i>
+                  Music Hall
+                </span>
+              </div>
+              <div style="display: flex; gap: var(--spacing-sm);">
+                <button class="button button-primary" style="flex: 1;">
+                  <i class="fas fa-car mr-2"></i>
+                  Join Carpool
+                </button>
+                <button class="button button-outline">
+                  <i class="fas fa-info-circle"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Tabs -->
+    <nav class="tabs">
+      <div class="container">
+        <ul>
+          <li class="is-active">
+            <a href="#">
+              <i class="fas fa-calendar-alt mr-2"></i>
+              Upcoming Events
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-car mr-2"></i>
+              My Carpools
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <script>
+    // Add some interactive elements
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-8px)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(-5px)';
+      });
+    });
+
+    // Simulate loading animation
+    setTimeout(() => {
+      document.querySelector('.hero-body').classList.add('fade-in');
+    }, 100);
+  </script>
+</body>
+
+</html>

@@ -6,11 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>EPCarpool</title>
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
   <link href="./bulma.min.css" rel="stylesheet" type="text/css" />
   <link href="./style.css" rel="stylesheet" type="text/css" />
+  
+  <!-- Icons and Scripts -->
   <script src="https://kit.fontawesome.com/16ae8e710d.js" crossorigin="anonymous"></script>
   <link rel="icon" href="favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="./style.css">
+  
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="/co2Tracker.js"></script>
@@ -25,70 +34,63 @@
           <div class="container">
             <div class="navbar-brand">
               <a class="navbar-item">
-                <div style="position: relative; display: flex; align-items: center;">
-                  <img src="EPS Logo - Transparent-4.png" alt="Logo">
-                  <h1 class="title is-3" style="margin-left: 10px; margin-bottom: -10px">EPCarpool</h1>
-                  <span
-                    style="position: absolute; top: -5px; right: -25px; background: #3273DC; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.7em; font-weight: bold;">BETA</span>
+                <div class="flex items-center relative">
+                  <img src="EPS Logo - Transparent-4.png" alt="EPCarpool Logo" class="navbar-brand-logo">
+                  <h1 class="title">EPCarpool</h1>
+                  <span class="beta-badge">BETA</span>
                 </div>
               </a>
-              <div class="navbar-item" style="padding: 0.5rem 1.25rem;">
-                <button class="button is-info is-light" onclick="showDisclaimer()">
-                  <span class="icon">
-                    <i class="fas fa-info-circle"></i>
-                  </span>
-                </button>
-              </div>
+              <button class="button button-secondary button-small" onclick="showDisclaimer()">
+                <span class="icon">
+                  <i class="fas fa-info-circle"></i>
+                </span>
+              </button>
               <span class="navbar-burger" data-target="navbarMenuHeroC" id="nav-toggle">
                 <span></span>
                 <span></span>
                 <span></span>
               </span>
             </div>
-            <div id="navbarMenuHeroC" class="navbar-menu ">
+            <div id="navbarMenuHeroC" class="navbar-menu">
               <div class="navbar-end">
-                <div class="is-button is-link">
-                  <div class="navbar-item">
-                    <span style="font-size: 1em; color: #30B700; float: right; display: flex; align-items: center; margin-right: 15px;">
-                      <a class="fa-solid fa-leaf" href="/sustainabilityStatement" style="color: #30B700; margin-right: 10px;"></a>
-
-                      <span>
-                        <span id="co2-savings" style="font-size: 0.9em; font-weight: bold;">0 kg CO₂ saved</span>
-                        <span id="co2-equivalents" class="co2-equivalents"></span>
-
-                      </span>
-                    </span>
-                    <div class="buttons" style="margin: 10px;margin-right: 0px;">
-                      <a class="button is-link is-outlined " href="/logout">
-                        Log out
+                <div class="co2-tracker">
+                  <div class="co2-icon">
+                    <i class="fas fa-leaf"></i>
+                  </div>
+                  <div class="co2-content">
+                    <div id="co2-savings" class="co2-savings">0 kg CO₂ saved</div>
+                    <div id="co2-equivalents" class="co2-equivalents"></div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <a class="button button-outline" href="/logout">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    Log out
+                  </a>
+                  <div class="dropdown">
+                    <button class="button button-primary" id="name_button">
+                      <%= firstName %> <%= lastName %>
+                      <i class="fas fa-angle-down ml-2"></i>
+                    </button>
+                    <div class="dropdown-menu" id="navbar-dropdown">
+                      <a class="dropdown-item" href="/updateSettings">
+                        <i class="fas fa-cog mr-2"></i>
+                        Update settings
                       </a>
-                      <div class="navbar-item has-dropdown is-hoverable "
-                        onclick="document.getElementById('navbar-dropdown').style.visibility = 'visible';">
-                        <a class="button is-link" id="name_button"
-                          style="background: linear-gradient(105deg, #3273DC, #275CBF);">
-                          <%= firstName %>
-                            <%= lastName %>
-                              <i style="margin-left: 5px;" class="fas fa-angle-down" aria-hidden="true"></i>
-                        </a>
-                        <div id="filler"
-                          style="width: 130px; background-color: transparent; height: 20px; position: absolute; margin-top: -15px;">
-                        </div>
-                        <div class="navbar-dropdown" id="navbar-dropdown">
-                          <a class="navbar-item" href="/updateSettings">
-                            Update settings
-                          </a>
-                          <a class="navbar-item" href="https://forms.office.com/r/deCSjA7bCR">
-                            Report a bug
-                          </a>
-                          <a class="navbar-item" href="/sustainabilityStatement">
-                            Sustainability statement
-                          </a>
-                          <hr class="navbar-divider">
-                          <div class="navbar-item">
-                            Version <%= process.env.VERSION %>
-                          </div>
-                        </div>
+                      <a class="dropdown-item" href="https://forms.office.com/r/deCSjA7bCR">
+                        <i class="fas fa-bug mr-2"></i>
+                        Report a bug
+                      </a>
+                      <a class="dropdown-item" href="/sustainabilityStatement">
+                        <i class="fas fa-leaf mr-2"></i>
+                        Sustainability statement
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item text-sm opacity-60">
+                        Version <%= process.env.VERSION %>
                       </div>
+                    </div>
+                  </div>
                     </div>
                   </div>
                 </div>
@@ -98,13 +100,14 @@
         </header>
       </div>
       <!-- Hero content: will be in the middle -->
-      <div class="hero-body" style="padding-bottom: 80px;">
-        <div class="container" style="margin-top: 0px; width: 100%; ">
-          <div id="create_event" style="margin-bottom: 0px">
+      <div class="hero-body">
+        <div class="container">
+          <div id="create_event" class="mb-6">
           </div>
-          <div class=" " style="position: absolute; margin-top: -40px;  width: 100%; ">
-            <label for="filter">Filter by: </label>
-            <select name="filter" id="filter">
+          
+          <div class="filter-container">
+            <label class="filter-label" for="filter">Filter by:</label>
+            <select name="filter" id="filter" class="filter-select">
               <option value="all">All</option>
               <option value="sports">Sports</option>
               <option value="academic teams">Academic teams</option>
@@ -113,74 +116,15 @@
             </select>
 
             <span id="createEventButton">
-              <button id="buttonzx" style="
-      padding: 5px 7px;
-      background-color: #f5f5f5;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      color: #333;
-      font-size: 13px;
-      cursor: pointer;
-      margin-left: 3px;
-      " onclick="var create_event = document.getElementById('create_event'); create_event.style.marginBottom='60px'; create_event.innerHTML = `<form class='box' style='margin-top: -20px'><div class='modal-card-head' style='padding: 0px;margin-bottom: 20px;background-color: white;border: none;'>
-        <div class='modal-card-title'>Create Event</div>
-    <button class='delete' aria-label='close' onclick='var create_event = document.getElementById(\'create_event\'); create_event.style.marginBottom=\'50px\'; create_event.innerHTML = \'\''></button>
-    </div>
-    <div class='field'>
-      <label class='label' for='ename'>Event name:</label>
-      <div class='control'>
-        <input class='input' type='text' id='ename' name='name'>
-      </div>
-    </div>
-    <div class='field'>
-      <label class='label' for='elocation'>Location name:</label>
-      <div class='control'>
-        <input class='input' type='text' id='elocation' name='location'>
-      </div>
-    </div>
-    <div class='field'>
-      <label class='label' for='address'>Address:</label>
-      <div class='autocomplete-container ' id=''>
-            <div class='control' id='autocomplete-container3'>
-              <!-- South Kirkland Park and Ride, Bellevue, WA 98004, United States of America -->
-            </div>
+              <button id="buttonzx" class="button button-primary" onclick="showCreateEventForm()">
+                <i class="fas fa-plus mr-2"></i>
+                Create event
+              </button>
+            </span>
           </div>
-    </div>
-    <div class='field'>
-      <label class='label' for='edate'>Date and time:</label>
-      <div class='control'>
-        <input class='input' type='datetime-local' id='edate' name='date'>
-      </div>
-    </div>
-    <div class='field'>
-      <label class='label' for='ecategory'>Category:</label>
-      <div class='control'>
-        <div class='select'>
-          <select id='ecategory' name='category'>
-            <option value='sports'>Sports</option>
-            <option value='academic teams'>Academic teams</option>
-            <option value='socials'>Socials</option>
-            <option value='other'>Other</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class='field'>
-      <label class='label'>Map Preview:</label>
-      <div id='map' style='height: 300px; width: 100%; border-radius: 4px; margin-bottom: 1rem;'></div>
-    </div>
-    <div class='field'>
-      <div class='control'>
-        <div class='button is-link' type='button' onclick='createevent();'>Submit</div>
-      </div>
-    </div>
-  </form>`; createEventInputs()">
-    Create event
-  </button>
-</span>
-          </div>
-          <!--Start here  -->
-          <div id="eventsJS">
+
+          <!-- Events Container -->
+          <div id="eventsJS" class="fade-in">
           </div>
         </div>
       </div>
@@ -190,8 +134,14 @@
         <nav class="tabs is-boxed is-fullwidth">
           <div class="container">
             <ul>
-              <li class="is-active"><a href="/" class="is-active1">Upcoming Events</a></li>
-              <li><a href="/mycarpools" class="white">My Carpools</a></li>
+              <li class="is-active"><a href="/" class="is-active1">
+                <i class="fas fa-calendar-alt mr-2"></i>
+                Upcoming Events
+              </a></li>
+              <li><a href="/mycarpools" class="white">
+                <i class="fas fa-car mr-2"></i>
+                My Carpools
+              </a></li>
             </ul>
           </div>
         </nav>

@@ -920,3 +920,93 @@ function unfocus() {
     element.classList.remove("is-focused");
   }
 }
+
+// Modern Create Event Form
+function showCreateEventForm() {
+  var create_event = document.getElementById('create_event');
+  create_event.style.marginBottom = '2rem';
+  create_event.innerHTML = `
+    <div class="card fade-in">
+      <div class="card-header">
+        <h2 class="card-title">Create New Event</h2>
+        <button class="button button-secondary button-small" onclick="hideCreateEventForm()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form class="card-content">
+        <div class="form-group">
+          <label class="form-label" for="ename">Event name</label>
+          <input class="form-input" type="text" id="ename" name="name" placeholder="Enter event name">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="elocation">Location name</label>
+          <input class="form-input" type="text" id="elocation" name="location" placeholder="Enter location name">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="address">Address</label>
+          <div class="autocomplete-container" id="autocomplete-container3">
+            <!-- Address autocomplete will be populated here -->
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="edate">Date and time</label>
+          <input class="form-input" type="datetime-local" id="edate" name="date">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="ecategory">Category</label>
+          <select class="form-input form-select" id="ecategory" name="category">
+            <option value="sports">Sports</option>
+            <option value="academic teams">Academic teams</option>
+            <option value="socials">Socials</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Map Preview</label>
+          <div id="map" style="height: 300px; width: 100%; border-radius: var(--radius-lg); margin-bottom: 1rem; background: var(--glassmorphism); border: 1px solid var(--glass-border);"></div>
+        </div>
+      </form>
+      
+      <div class="card-footer">
+        <button class="button button-secondary" onclick="hideCreateEventForm()">
+          Cancel
+        </button>
+        <button class="button button-primary" onclick="createevent();">
+          <i class="fas fa-plus mr-2"></i>
+          Create Event
+        </button>
+      </div>
+    </div>
+  `;
+  createEventInputs();
+}
+
+function hideCreateEventForm() {
+  var create_event = document.getElementById('create_event');
+  create_event.style.marginBottom = '0px';
+  create_event.innerHTML = '';
+}
+
+// Enhanced mobile menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('navbarMenuHeroC');
+  
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function() {
+      navMenu.classList.toggle('is-active');
+    });
+  }
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function(event) {
+    if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+      navMenu.classList.remove('is-active');
+    }
+  });
+});
